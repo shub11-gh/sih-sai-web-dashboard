@@ -69,7 +69,7 @@ const LoginPage = ({ setAuth }) => {
             <div className="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold">SAI</div>
             <div>
               <div className="text-2xl font-bold">SAI - Sports Talent Assessment</div>
-              <div className="text-sm text-slate-500">Officials Control Panel — {mode==='login' ? 'sign in' : 'create account'}</div>
+              <div className="text-sm text-slate-500">Officials Control Panel — {mode==='login' ? 'Sign in' : 'create account'}</div>
             </div>
           </div>
 

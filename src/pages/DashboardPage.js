@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 import AthletesList from '../components/AthletesList';
+import { FaUsers, FaFlag, FaChartBar } from 'react-icons/fa';
 
 const StatCard = ({ title, value, icon, color }) => (
   <div className="bg-white rounded-lg shadow-md p-6 flex items-center">
@@ -16,6 +18,23 @@ const StatCard = ({ title, value, icon, color }) => (
 
 
 export default function DashboardPage(){
+  const [stats, setStats] = useState({
+    totalAthletes: 0,
+    flaggedAthletes: 0,
+    avgOverallScore: 0,
+  });
+
+  useEffect(() => {
+    fetch('/api/athletes')
+      .then(res => res.json())
+      .then(data => {
+        const totalAthletes = data.length;
+        const flaggedAthletes = data.filter(a => a.flagged).length;
+        const avgOverallScore = data.length > 0 ? Math.round(data.reduce((acc, a) => acc + a.overall, 0) / data.length) : 0;
+        setStats({ totalAthletes, flaggedAthletes, avgOverallScore });
+      });
+  }, []);
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar/>
@@ -23,23 +42,23 @@ export default function DashboardPage(){
         <Topbar title="Dashboard" />
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <StatCard 
-              title="Total Athletes" 
-              value="Live" 
+            <StatCard
+              title="Total Athletes"
+              value={stats.totalAthletes}
               color="blue"
-              icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.234-1.256-.638-1.724M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 0c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>}
+              icon={<FaUsers className="h-6 w-6" />}
             />
-            <StatCard 
-              title="Flagged Athletes" 
-              value="Live" 
+            <StatCard
+              title="Flagged Athletes"
+              value={stats.flaggedAthletes}
               color="red"
-              icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-2l9-9 9 9v2M3 12l9-9 9 9" /></svg>}
+              icon={<FaFlag className="h-6 w-6" />}
             />
-            <StatCard 
-              title="Avg. Overall Score" 
-              value="Live" 
+            <StatCard
+              title="Avg. Overall Score"
+              value={stats.avgOverallScore}
               color="green"
-              icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>}
+              icon={<FaChartBar className="h-6 w-6" />}
             />
           </div>
         </div>
