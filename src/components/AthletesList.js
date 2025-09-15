@@ -10,6 +10,12 @@ const AthletesList = () => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [filters, setFilters] = useState({
+    testType: "",
+    ageGroup: "",
+    gender: "",
+    region: ""
+  });
 
   useEffect(() => {
     axios.get("/athletes")
@@ -23,11 +29,29 @@ const AthletesList = () => {
   }, []);
 
   useEffect(() => {
-    let results = athletes.filter(athlete =>
-      athlete.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let results = athletes
+      .filter(athlete =>
+        athlete.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .filter(athlete =>
+        (filters.gender ? athlete.gender === filters.gender : true) &&
+        (filters.region ? athlete.region === filters.region : true) &&
+        (filters.ageGroup ? isInAgeGroup(athlete.age, filters.ageGroup) : true)
+      );
     setFilteredAthletes(results);
-  }, [searchTerm, athletes]);
+  }, [searchTerm, athletes, filters]);
+
+  const isInAgeGroup = (age, ageGroup) => {
+    if (ageGroup === "Under 18") return age < 18;
+    if (ageGroup === "18-25") return age >= 18 && age <= 25;
+    if (ageGroup === "26-30") return age >= 26 && age <= 30;
+    if (ageGroup === "Over 30") return age > 30;
+    return true;
+  }
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  }
 
   const requestSort = (key) => {
     let direction = 'ascending';
@@ -53,6 +77,19 @@ const AthletesList = () => {
   const currentItems = filteredAthletes.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredAthletes.length / itemsPerPage);
 
+  const exportToCSV = () => {
+    const csvContent = "data:text/csv;charset=utf-8,"
+      + [Object.keys(currentItems[0]), ...currentItems.map(item => Object.values(item))]
+        .map(e => e.join(","))
+        .join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "athletes.csv");
+    document.body.appendChild(link);
+    link.click();
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -63,6 +100,28 @@ const AthletesList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="px-4 py-2 border rounded-md w-full md:w-1/3"
         />
+        <button onClick={exportToCSV} className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md">Export to CSV</button>
+      </div>
+      <div className="flex items-center justify-between mb-4">
+        <select name="gender" onChange={handleFilterChange} className="px-4 py-2 border rounded-md">
+          <option value="">All Genders</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <select name="region" onChange={handleFilterChange} className="px-4 py-2 border rounded-md">
+          <option value="">All Regions</option>
+          <option value="North">North</option>
+          <option value="South">South</option>
+          <option value="East">East</option>
+          <option value="West">West</option>
+        </select>
+        <select name="ageGroup" onChange={handleFilterChange} className="px-4 py-2 border rounded-md">
+          <option value="">All Ages</option>
+          <option value="Under 18">Under 18</option>
+          <option value="18-25">18-25</option>
+          <option value="26-30">26-30</option>
+          <option value="Over 30">Over 30</option>
+        </select>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow overflow-hidden">
@@ -90,7 +149,7 @@ const AthletesList = () => {
               <tr><td colSpan="5" className="text-center py-4">No results</td></tr>
             ) : (
               currentItems.map(athlete => (
-                <tr key={athlete.id} className="hover:bg-gray-50">
+                <tr key={athlete.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => window.location.href=`/athlete/${athlete.id}`}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{athlete.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{athlete.sport}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{athlete.team}</td>
