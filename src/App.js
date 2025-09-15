@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
 import AthletesPage from "./pages/AthletesPage";
 import AthleteProfilePage from "./pages/AthleteProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
@@ -17,8 +18,10 @@ function App() {
           element={
             <PrivateRoute auth={auth}>
               <Routes>
-                <Route path="/" element={<AthletesPage />} />
+                <Route path="/" element={<DashboardPage />} />
+                <Route path="/athletes" element={<AthletesPage />} />
                 <Route path="/athlete/:id" element={<AthleteProfilePage />} />
+                <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </PrivateRoute>
           }

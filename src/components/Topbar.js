@@ -1,22 +1,21 @@
 import SearchBar from './SearchBar';
 
-export default function Topbar({ title='Dashboard', right=null, onSearch }){
+export default function Topbar({ title='Dashboard', onSearch }){
   return (
-    <header className="sticky top-0 z-10 bg-white border-b">
-      <div className="px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-20 bg-white shadow-sm">
+      <div className="px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <h1 className="text-xl font-semibold">{title}</h1>
-          <div className="hidden md:block w-[420px]"><SearchBar onChange={onSearch} /></div>
+          <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
+          <div className="hidden md:block w-96"><SearchBar onChange={onSearch} /></div>
         </div>
 
-        <div className="flex items-center gap-4">
-          {right}
-          <div className="flex items-center gap-3">
-            <div className="text-right mr-2">
-              <div className="text-sm font-medium">Admin</div>
-              <div className="text-xs text-slate-500">SAI Official</div>
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <div className="text-sm font-semibold text-gray-800">Demo User</div>
+              <div className="text-xs text-gray-500">SAI Official</div>
             </div>
-            <div className="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center">A</div>
+            <div className="w-11 h-11 rounded-full bg-brand-100 flex items-center justify-center font-bold text-brand-600 border-2 border-brand-200">DU</div>
           </div>
         </div>
       </div>
