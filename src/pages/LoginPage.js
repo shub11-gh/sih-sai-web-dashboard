@@ -69,7 +69,7 @@ const LoginPage = ({ setAuth }) => {
             <div className="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold">SAI</div>
             <div>
               <div className="text-2xl font-bold">SAI - Sports Talent Assessment</div>
-              <div className="text-sm text-slate-500">Officials control panel — {mode==='login' ? 'sign in' : 'create account'}</div>
+              <div className="text-sm text-slate-500">Officials Control Panel — {mode==='login' ? 'sign in' : 'create account'}</div>
             </div>
           </div>
 
@@ -109,7 +109,8 @@ const LoginPage = ({ setAuth }) => {
               </div>
             </form>
           ) : (
-            <form onSubmit={handleSignup} className="mt-4 space-y-4">
+            <div className="my-5">
+            <form onSubmit={handleSignup} className="mt-4 space-y-4" style={{height: '60vh'}}>
               <div>
                 <label className="block text-sm font-medium text-slate-700">Full name</label>
                 <input value={name} onChange={e=>setName(e.target.value)} className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500" />
@@ -135,9 +136,10 @@ const LoginPage = ({ setAuth }) => {
                 <button type="submit" className="w-full bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-md shadow-sm">Create account</button>
               </div>
             </form>
+            </div>
           )}
 
-          <div className="text-xs text-slate-500 mt-4">By using this dashboard you agree to SAI policies. Demo login: admin/password</div>
+          <div className="text-xs text-slate-500 mt-4">By using this dashboard you agree to SAI policies. <br />Demo login: admin/password</div>
         </div>
 
         <div className="hidden md:flex items-center justify-center bg-gradient-to-br from-brand-600 to-brand-400 text-white p-6 relative">
