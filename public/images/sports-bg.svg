@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#0ea5e9" />
+      <stop offset="1" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)" />
+  <!-- simple icons -->
+  <g transform="translate(50,60)" fill="white" opacity="0.12">
+    <circle cx="60" cy="60" r="40" />
+    <rect x="140" y="30" width="80" height="60" rx="12" />
+    <path d="M320 20 L360 80 L280 80 Z" />
+  </g>
+  <g transform="translate(430,320)" fill="white" opacity="0.14">
+    <circle cx="40" cy="40" r="36" />
+    <rect x="90" y="10" width="120" height="60" rx="8" />
+    <path d="M260 10 C300 40, 300 80, 260 110" stroke="white" stroke-width="6" fill="none" opacity="0.1" />
+  </g>
+  <text x="50" y="520" fill="white" font-size="28" font-family="Arial" opacity="0.12">SAI — Sports Analytics</text>
+</svg>
