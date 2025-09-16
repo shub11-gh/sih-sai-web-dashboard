@@ -85,56 +85,90 @@
       "athleteId": 1,
       "testType": "Speed",
       "date": "2023-10-26",
-      "score": 90
+      "score": 90,
+      "cheatFlag": false
     },
     {
       "id": 2,
       "athleteId": 2,
       "testType": "Agility",
       "date": "2023-10-26",
-      "score": 85
+      "score": 85,
+      "cheatFlag": true
     },
     {
       "id": 3,
       "athleteId": 1,
       "testType": "Endurance",
       "date": "2023-10-25",
-      "score": 88
+      "score": 88,
+      "cheatFlag": false
     },
     {
       "id": 4,
       "athleteId": 3,
       "testType": "Speed",
       "date": "2023-10-27",
-      "score": 88
+      "score": 88,
+      "cheatFlag": false
     },
     {
       "id": 5,
       "athleteId": 4,
       "testType": "Power",
       "date": "2023-10-27",
-      "score": 92
+      "score": 92,
+      "cheatFlag": false
     },
     {
       "id": 6,
       "athleteId": 5,
       "testType": "Agility",
       "date": "2023-10-28",
-      "score": 89
+      "score": 89,
+      "cheatFlag": true
     },
     {
       "id": 7,
       "athleteId": 6,
       "testType": "Flexibility",
       "date": "2023-10-28",
-      "score": 94
+      "score": 94,
+      "cheatFlag": false
     },
     {
       "id": 8,
       "athleteId": 7,
       "testType": "Speed",
       "date": "2023-10-29",
-      "score": 80
+      "score": 80,
+      "cheatFlag": false
+    }
+  ],
+  "announcements": [
+    {
+      "id": 1,
+      "title": "National Trials - Athletics",
+      "details": "Phase 1 selection trials for U18 and U21 categories.",
+      "selectionDate": "2025-10-05",
+      "selectionEndDate": "2025-10-07",
+      "location": "Jawaharlal Nehru Stadium, Delhi"
+    },
+    {
+      "id": 2,
+      "title": "Zonal Swimming Selections",
+      "details": "Prelims and finals will be conducted on the same day.",
+      "selectionDate": "2025-10-12",
+      "selectionEndDate": "2025-10-12",
+      "location": "Shiv Chhatrapati Sports Complex, Pune"
+    },
+    {
+      "id": "fdcf",
+      "title": "Cricket Selection",
+      "details": "U 19 Selections",
+      "selectionDate": "2025-09-17",
+      "selectionEndDate": "2025-09-19",
+      "location": "Bangalore"
     }
   ]
 }

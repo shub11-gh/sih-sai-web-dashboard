@@ -13,7 +13,7 @@ const Rating = ({ value, maxValue = 5 }) => {
   }
 
   return (
-    <div className="w-full bg-gray-200 rounded-full h-2.5">
+    <div className="w-full bg-dark-600 rounded-full h-2.5">
       <div className={`h-2.5 rounded-full ${barColor}`} style={{ width: `${normalizedValue}%` }}></div>
     </div>
   );

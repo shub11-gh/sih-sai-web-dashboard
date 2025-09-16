@@ -4,6 +4,9 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import AthletesPage from "./pages/AthletesPage";
 import AthleteProfilePage from "./pages/AthleteProfilePage";
+import AnnouncementsPage from "./pages/AnnouncementsPage";
+import ReportsPage from "./pages/ReportsPage";
+import SettingsPage from "./pages/SettingsPage";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/athletes" element={<AthletesPage />} />
+                <Route path="/announcements" element={<AnnouncementsPage />} />
+                <Route path="/reports" element={<ReportsPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/athlete/:id" element={<AthleteProfilePage />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>

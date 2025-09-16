@@ -6,7 +6,7 @@ const SearchBar = ({ value, onChange }) => (
     placeholder="Search name/team"
     value={value}
     onChange={e => onChange(e.target.value)}
-    className="border p-2 rounded"
+    className="border border-dark-600 bg-dark-700 text-white p-2 rounded placeholder-dark-400 focus:outline-none focus:border-brand-500"
   />
 );
 
